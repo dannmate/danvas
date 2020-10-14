@@ -5,10 +5,12 @@
   var socket = io();
   var canvas = document.getElementsByClassName('whiteboard')[0];
   var colors = document.getElementsByClassName('color');
+  var sizes = document.getElementsByClassName('size');
   var context = canvas.getContext('2d');
 
   var current = {
-    color: 'black'
+    color: 'black',
+    lineWidth: 2
   };
   var drawing = false;
 
@@ -27,18 +29,22 @@
     colors[i].addEventListener('click', onColorUpdate, false);
   }
 
+  for (var i = 0; i < sizes.length; i++){
+    sizes[i].addEventListener('click', onSizeUpdate, false);
+  }
+
   socket.on('drawing', onDrawingEvent);
 
   window.addEventListener('resize', onResize, false);
   onResize();
 
 
-  function drawLine(x0, y0, x1, y1, color, emit){
+  function drawLine(x0, y0, x1, y1, color, lineWidth, emit){
     context.beginPath();
     context.moveTo(x0, y0);
     context.lineTo(x1, y1);
     context.strokeStyle = color;
-    context.lineWidth = 2;
+    context.lineWidth = lineWidth;
     context.stroke();
     context.closePath();
 
@@ -51,7 +57,8 @@
       y0: y0 / h,
       x1: x1 / w,
       y1: y1 / h,
-      color: color
+      color: color,
+      lineWidth: lineWidth
     });
   }
 
@@ -64,18 +71,35 @@
   function onMouseUp(e){
     if (!drawing) { return; }
     drawing = false;
-    drawLine(current.x, current.y, e.clientX||e.touches[0].clientX, e.clientY||e.touches[0].clientY, current.color, true);
+    drawLine(current.x, current.y, e.clientX||e.touches[0].clientX, e.clientY||e.touches[0].clientY, current.color, current.lineWidth, true);
   }
 
   function onMouseMove(e){
     if (!drawing) { return; }
-    drawLine(current.x, current.y, e.clientX||e.touches[0].clientX, e.clientY||e.touches[0].clientY, current.color, true);
+    drawLine(current.x, current.y, e.clientX||e.touches[0].clientX, e.clientY||e.touches[0].clientY, current.color, current.lineWidth, true);
     current.x = e.clientX||e.touches[0].clientX;
     current.y = e.clientY||e.touches[0].clientY;
   }
 
   function onColorUpdate(e){
     current.color = e.target.className.split(' ')[1];
+   
+  }
+
+  function onSizeUpdate(e){
+    console.log(e.target.className.split(' ')[1]);
+    switch (e.target.className.split(' ')[1]) {
+      case 'small':
+        current.lineWidth = 2;
+        break;
+      case 'medium':
+        current.lineWidth = 5;
+        break;
+      case 'large':
+        current.lineWidth = 7;
+        break;
+    }
+  
   }
 
   // limit the number of events per second
@@ -94,7 +118,7 @@
   function onDrawingEvent(data){
     var w = canvas.width;
     var h = canvas.height;
-    drawLine(data.x0 * w, data.y0 * h, data.x1 * w, data.y1 * h, data.color);
+    drawLine(data.x0 * w, data.y0 * h, data.x1 * w, data.y1 * h, data.color, data.lineWidth);
   }
 
   // make the canvas fill its parent
