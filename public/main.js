@@ -41,6 +41,7 @@
 
   function drawLine(x0, y0, x1, y1, color, lineWidth, emit){
     context.beginPath();
+    
     context.moveTo(x0, y0);
     context.lineTo(x1, y1);
     context.strokeStyle = color;
@@ -64,6 +65,7 @@
 
   function onMouseDown(e){
     drawing = true;
+    
     current.x = e.clientX||e.touches[0].clientX;
     current.y = e.clientY||e.touches[0].clientY;
   }
@@ -77,12 +79,16 @@
   function onMouseMove(e){
     if (!drawing) { return; }
     drawLine(current.x, current.y, e.clientX||e.touches[0].clientX, e.clientY||e.touches[0].clientY, current.color, current.lineWidth, true);
+
     current.x = e.clientX||e.touches[0].clientX;
     current.y = e.clientY||e.touches[0].clientY;
   }
 
   function onColorUpdate(e){
     current.color = e.target.className.split(' ')[1];
+
+    console.log(e.target.className.split(' ')[2]);
+    //if (e.target.className.split(' ')[2] == 'eraser') current.lineWidth = 18;
    
   }
 

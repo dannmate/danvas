@@ -19,13 +19,15 @@ body {
 
 .whiteboard {
   height: 100%;
-  width: 100%;
-  position: absolute;
+  width: 100%; 
+  /* position: absolute;  */
   left: 0;
   right: 0;
   bottom: 0;
   top: 0;
+  /* border: 2px solid black;  */
 }
+
 
 .colors {
   position: fixed;
@@ -33,8 +35,8 @@ body {
 
 .color {
   display: inline-block;
-  height: 48px;
-  width: 48px;
+  height: 72px;
+  width: 72px;
   border-radius: 5px;
   border: 1px solid gray;
 }
@@ -58,8 +60,8 @@ body {
 
 .size {
   display: inline-block;
-  height: 48px;
-  width: 48px;
+  height: 72px;
+  width: 72px;
   border-radius: 5px;
   border: 1px solid gray;
 }
@@ -73,3 +75,4 @@ body {
 .size.large {
   background-color: green;
 }
+

@@ -1,5 +1,64 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <title>danvas</title>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+		
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+		
+		<div class="wrapper d-flex align-items-stretch" style="position: relative">
+			<nav id="sidebar" style="position: absolute;">
+				<div class="custom-menu">
+					<button type="button" id="sidebarCollapse" class="btn btn-primary">
+	          <i class="fa fa-bars"></i>
+	          <span class="sr-only">Toggle Menu</span>
+	        </button>
+        </div>
+				<div class="p-4">
+		  		<h1><a href="index.html" class="logo">danvas <span>A real-time collaborative canvas drawing app</span></a></h1>
+          <div class="color black"></div>
+          <div class="color red"></div>
+          <div class="color green"></div>
+          <div class="color blue"></div>
+          <div class="color yellow"></div>
+          <img class="color white eraser" src="assets/eraser-11.png">
+          <br />
+         
+          <div class="size small"> </div>
+          <div class="size medium"></div>
+          <div class="size large"></div>
+	        <div class="footer">
+	        	<p>
+						 
+	        </div>
+
+	      </div>
+    	</nav>
+
+        <!-- Page Content  -->
+      <div id="content" >
+        <canvas class="whiteboard" ></canvas>
+    </div>
+    </div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/main.js"></script>
+  </body>
+</html>
+<!-- 
+<!doctype html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>danvas</title>
@@ -26,4 +85,4 @@
   <script src="/socket.io/socket.io.js"></script>
   <script src="/main.js"></script>
 </body>
-</html>
+</html> -->
